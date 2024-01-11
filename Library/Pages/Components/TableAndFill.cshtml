@@ -1,0 +1,49 @@
+﻿@page
+@model Library.Pages.Components.TableAndFillModel
+@{
+}
+<div class="table-responsive">
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th class="w-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+<script>
+    //First parameter should be the body of a table, second parameter would be the data you choose for the table, and the last parameter should be the html code for your row for the table
+    function fillTable(tableBodySelector, data, renderRow) {
+        const tableBody = document.querySelector(tableBodySelector);
+        if (!tableBody) {
+            console.error('Table body not found');
+            return;
+        }
+
+        const rows = data.map(item => renderRow(item)).join('');
+        tableBody.innerHTML = rows;
+    }
+    const myDataArray = [
+        { "name": "Alice", "age": 30, "city": "New York" },
+        { "name": "Bob", "age": 25, "city": "Los Angeles" },
+        { "name": "Charlie", "age": 35, "city": "Chicago" }
+        // More objects as in your DataArray
+    ];
+    // Usage example:
+    fillTable('#myTable tbody', myDataArray, item => `
+        <tr>
+            <td>${item.name}</td>
+            <td>${item.age}</td>
+            <td>${item.city}</td>
+            <!-- Add more cells as needed based on the item structure -->
+        </tr>
+    `);
+
+    //
+</script>
